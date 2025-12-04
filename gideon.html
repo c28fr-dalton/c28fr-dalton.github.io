@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		#gids{
+		width: 550px;
+		height: 550px;
+		background-image: url(https://bbk12e1-cdn.myschoolcdn.com/ftpimages/98/user/large_user_4035855_205.jpg?crop=0,0,100%,85%&resize=200,200);
+		background-size:cover;
+		
+
+
+		}
+
+		#text{
+			width: 100px;
+			height:100px;
+			font-size: 50px;
+			border: 1px solid black;
+		}
+
+	</style>
+
+
+</head>
+<body>
+
+<center>
+
+My name is gidders and your score is ....
+<div id="text"></div>
+
+<div id="gids"></div>
+
+</center>
+
+<script type="text/javascript">
+	let score=0; 
+
+	gids.addEventListener("click", function(){
+		score=score+1
+		console.log(score)
+		text.innerText=score
+
+	})
+	
+
+</script>
+
+</body>
+</html>

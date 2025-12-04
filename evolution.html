@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		
+		#monke{
+
+			background-image: url(first.png);
+			width: 300px;
+			height:300px;
+			background-repeat: no-repeat;
+			background-size: contain;
+
+
+
+
+		}
+
+
+		#evolution{
+
+		
+			font-size: 100px ;
+			color: black;
+
+		}
+	</style>
+
+</head>
+<body>
+
+
+<center> <div id=evolution>Evolution In a Nutshell</div> </center>
+
+
+<center>	<div id=monke></div> </center>
+
+<script type="text/javascript">
+	
+	let counter=0;
+
+	monke.addEventListener("click", function(){
+		
+		counter = counter +1
+
+		console.log(counter)
+
+		if (counter==1) {
+			monke.style.backgroundImage="url(second.png)"
+
+
+		}
+
+		if(counter==2){
+
+			monke.style.backgroundImage="url(third.png)"
+		}
+
+		if(counter>2){
+
+			monke.style.backgroundImage="url(https://bbk12e1-cdn.myschoolcdn.com/ftpimages/98/user/large_user_4035843_831.jpg?crop=0,0,100%,85%&resize=200,200)"
+
+		}
+	})
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<style>
+		
+		#rufus{
+
+			background-image: url(https://i.pinimg.com/originals/18/f5/66/18f566fa5cf046c1e81fc6c61ce5dc53.gif);
+			width: 400px;
+			height: 400px;
+			position:absolute;
+			background-size:contain;
+			top:100px;
+			left:100px;
+
+		}
+
+
+	</style>
+
+
+</head>
+<body>
+
+	<div id="rufus"> </div>
+
+	<script type="text/javascript">
+
+
+rufus.style.left="0px"
+
+
+document.addEventListener("keypress", function(){
+		console.log("what up i am rufus")
+
+		rufus.style.left=parseInt(rufus.style.left) + 5 + "px"
+	})
+
+
+</script>
+
+
+
+
+</body>
+</html>
