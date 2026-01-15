@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+<style>
+	#title{
+		font-size: 60px;
+		color: dodgerblue;
+	}
+</style>
+
+
+</head>
+<body>
+
+<center>
+	<div id="title"> Pictures I took in St. Barths</div>
+</center>
+
+
+<script type="text/javascript">
+	
+
+let photos = ["beach.png", "dad.png", "plane.png"]
+
+document.addEventListener("click",function(){
+	let randomNumber = Math.round(Math.random()*3)
+	alert(photos[randomNumber])
+
+})
+
+
+
+</script>
+
+
+</body>
+</html>

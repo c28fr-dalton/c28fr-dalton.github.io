@@ -1,0 +1,43 @@
+<<!DOCTYPE html>
+<html>
+<head>
+	
+<style>
+	
+#deer{
+
+background-image: url(https://cdn.dribbble.com/userupload/20677064/file/original-69b46c098ac656344a538f6dd78fb943.gif);
+width: 700px;
+height: 700px;
+background-repeat: no-repeat;
+background-size: contain;
+top: 100px;
+left: 100px;
+position: absolute;
+
+
+}
+
+
+</style>
+
+</head>
+<body>
+
+<div id=deer></div>
+
+
+<script type="text/javascript"> 
+
+
+deer.style.left="0px"
+
+document.addEventListener("keypress", function(){
+		console.log("i am deer")
+
+		deer.style.left=parseInt(deer.style.left) + 5 + "px"
+})
+</script>
+
+</body>
+</html>

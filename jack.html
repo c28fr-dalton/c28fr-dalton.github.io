@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+
+<style>
+	
+#jack{
+
+width:100px;
+height: 100px;
+background-image: url(https://www.rochester.edu/newscenter/wp-content/uploads/2019/03/fea-court-jesters.jpg);
+background-size:contain;
+position: absolute;
+transition:.5s;
+background-repeat: no-repeat;
+
+}
+
+#title{
+
+font-size: 100px;
+
+
+}
+
+body{
+	background-color: darkred;
+}
+
+
+</style>
+
+</head>
+<body>
+
+
+
+<center>
+<div id="title">Jack-A-Mole</div></center>
+<div id="jack"></div>
+
+<script>
+	
+function moveJack (){
+	jack.style.left=Math.random()*1000+"px"
+	jack.style.top=Math.random()*1000+"px"
+}
+
+setInterval(moveJack, 1000)
+
+
+jack.addEventListener("click", function(){
+	alert("owe stop that.")
+})
+
+
+
+</script>
+
+
+</body>
+</html>
