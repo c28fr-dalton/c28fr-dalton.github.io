@@ -8,9 +8,35 @@
 		height: 10px;
 		position: absolute;
 		display: inline-block;
+		animation-name: swing;
+		animation-duration: 1.2s;
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
+	
 
 
 	}
+
+	@keyframes swing{
+		from{
+			transform: rotate(-45deg);
+		}
+		to{
+			transform: rotate(45deg);
+		}
+	
+
+	}
+
+	@keyframes swing3d{
+		from{
+			transform: rotateZ(-25deg) rotateY(25deg);
+		}
+	to{
+		transform: rotateZ(25deg) rotateY(180deg);
+	}
+	}
+
 </style>
 </head>
 <body>
@@ -39,7 +65,7 @@ function makeConfetti(){
 
 		if (parseInt(square.style.top) > 1000){square.style.top = Math.random() * 100 * "px"}
 	}
-setInterval(fall, 40)
+setInterval(fall, 60)
 }
 
 
