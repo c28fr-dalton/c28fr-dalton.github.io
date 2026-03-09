@@ -1,0 +1,52 @@
+<html>
+<html>
+<head>
+	
+	<title></title>
+<style>
+	body {
+		background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpDuNbEpZe46QKk7gL2KvvID9xljccmw-Xew&s);
+		
+	}
+	#badButton{
+		font-size: 50px;
+		position: absolute;
+
+
+
+	}
+
+
+</style>
+</head>
+
+<body>
+
+
+<button id="badButton"> you can't click me </button>
+
+<script>
+	let badButton = document.getElementById("badButton")
+	console.log(badButton)
+
+	badButton.addEventListener("click", function(){
+		console.log("click")
+	})
+	
+	badButton.addEventListener("mouseover", function(){
+
+		console.log("mouse is hovering")
+
+		badButton.style.top=Math.random()*700+"px"
+		badButton.style.left=Math.random()*1500+"px"
+
+	})
+	
+	badButton.addEventListener("mouseout", function(){
+		console.log("mouseout")
+	
+	})
+
+</script>
+</body>
+</html>
