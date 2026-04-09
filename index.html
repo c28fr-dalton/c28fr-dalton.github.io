@@ -3,34 +3,44 @@
 <head>
 	
 	<style>
-		body{
-			background-image: url(road2.png);
-			background-size:cover;
-			background-repeat: no-repeat ;
 
-
-		}
-
-		#stop1{
-			width:100px;
-			height:100px;
-			position:relative;
-			top:480px;
-			left:110px;
-			color: white;
-			font-size: 40px;
-		}
-
-		#yield1{
-
-			width:50px;
-			height: 50px;
+	.container {
 			position: relative;
-			top: 373px;
-			left:1206px;
-			color: black;
-			font-size:30px;
+			display: inline-block;
 		}
+
+		.container img {
+			width: 100%;
+			height: auto;
+		}
+
+		.projects {
+			position: absolute;
+			top: 28%;
+			left: 80%;
+			transform: translate(-50%, -50%) rotate(10deg);
+			font-size: 60px;
+			color: black;
+			text-decoration: none;
+		}
+
+		.journal {
+			
+			position: absolute;
+			top: 38%;
+			left: 80%;
+			transform: translate(-50%, -50%)rotate(10deg);
+			font-size: 60px;
+			color: black;
+			text-decoration: none;
+		}
+
+		.projects:hover, .journal:hover {
+	color: royalblue;
+	transform: translate(-50%, -50%) rotate(10deg) scale(1.1);
+}
+
+
 	
 	</style>
 
@@ -38,15 +48,21 @@
 </head>
 <body>
 
-<a href="projects.html">
-	<div id=stop1>projects</div>
-</a>
+<div style="text-align: center;">
 
-<a href="journal.html">
-	<div id=yield1>journal</div>
-</a>
 
- 	
+<div class ="container">
+
+		<img src="wiltblank.jpeg" alt="Wilt">
+
+		<a href="projects.html" class="projects">Projects</a>
+		<a href="journal.html" class="journal">Journal</a>
+	</div>
+
+</div>
+
+
+
 
 
 </body>
