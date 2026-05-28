@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Taste of Manhattan</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f3ee;
+      color: #111;
+      text-align: center;
+    }
+
+    header {
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 5px;
+    }
+
+    p {
+      color: #555;
+    }
+
+    #container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 20px;
+      flex-wrap: wrap;
+    }
+
+    #map {
+      width: 330px;
+      background: #111;
+      padding: 15px;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .neighborhood {
+      background: white;
+      margin: 8px;
+      padding: 15px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-weight: bold;
+    }
+
+    .neighborhood:hover {
+      background: #ffcc66;
+      transform: scale(1.04);
+    }
+
+    #info {
+      width: 420px;
+      min-height: 500px;
+      background: white;
+      border-radius: 30px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      text-align: left;
+    }
+
+    #info h2 {
+      text-align: center;
+      font-size: 32px;
+    }
+
+    .restaurant {
+      background: #f5f3ee;
+      padding: 15px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+
+    .restaurant h3 {
+      margin: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 5px 10px;
+      background: #111;
+      color: white;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 20px;
+      background: #111;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Taste of Manhattan</h1>
+    <p>Click a neighborhood to find 3 restaurants worth trying.</p>
+  </header>
+
+  <div id="container">
+
+    <div id="map">
+      <div class="neighborhood" onclick="showRestaurants('Harlem')">Harlem</div>
+      <div class="neighborhood" onclick="showRestaurants('Upper West Side')">Upper West Side</div>
+      <div class="neighborhood" onclick="showRestaurants('Upper East Side')">Upper East Side</div>
+      <div class="neighborhood" onclick="showRestaurants('Midtown')">Midtown</div>
+      <div class="neighborhood" onclick="showRestaurants('Hell’s Kitchen')">Hell’s Kitchen</div>
+      <div class="neighborhood" onclick="showRestaurants('Chelsea')">Chelsea</div>
+      <div class="neighborhood" onclick="showRestaurants('West Village')">West Village</div>
+      <div class="neighborhood" onclick="showRestaurants('SoHo')">SoHo</div>
+      <div class="neighborhood" onclick="showRestaurants('Chinatown')">Chinatown</div>
+      <div class="neighborhood" onclick="showRestaurants('Lower East Side')">Lower East Side</div>
+      <div class="neighborhood" onclick="showRestaurants('Financial District')">Financial District</div>
+    </div>
+
+    <div id="info">
+      <h2>Pick a neighborhood</h2>
+      <p style="text-align:center;">Your top 3 restaurants will show up here.</p>
+    </div>
+
+  </div>
+
+  <script>
+    let restaurantData = {
+      "Harlem": [
+        {
+          name: "Red Rooster",
+          cuisine: "American / Soul Food",
+          price: "$$",
+          description: "A lively Harlem spot with comfort food and a strong neighborhood feel."
+        },
+        {
+          name: "Sylvia’s",
+          cuisine: "Soul Food",
+          price: "$$",
+          description: "A classic Harlem restaurant known for fried chicken, ribs, and history."
+        },
+        {
+          name: "Harlem Shake",
+          cuisine: "Burgers",
+          price: "$",
+          description: "A casual burger spot that is good for a quick meal with friends."
+        }
+      ],
+
+      "Upper West Side": [
+        {
+          name: "Jacob’s Pickles",
+          cuisine: "Southern Comfort",
+          price: "$$",
+          description: "Famous for huge portions, biscuits, fried chicken, and comfort food."
+        },
+        {
+          name: "Maison Pickle",
+          cuisine: "American",
+          price: "$$",
+          description: "A stylish spot with French dip sandwiches and big desserts."
+        },
+        {
+          name: "Absolute Bagels",
+          cuisine: "Bagels",
+          price: "$",
+          description: "A simple but legendary bagel place."
+        }
+      ],
+
+      "Upper East Side": [
+        {
+          name: "JG Melon",
+          cuisine: "Burgers",
+          price: "$$",
+          description: "An old-school burger place with a classic NYC feel."
+        },
+        {
+          name: "Uva",
+          cuisine: "Italian",
+          price: "$$",
+          description: "Cozy Italian food with pasta, small plates, and a nice atmosphere."
+        },
+        {
+          name: "Levain Bakery",
+          cuisine: "Bakery",
+          price: "$",
+          description: "Known for huge cookies that are perfect for dessert."
+        }
+      ],
+
+      "Midtown": [
+        {
+          name: "Los Tacos No. 1",
+          cuisine: "Mexican",
+          price: "$",
+          description: "Fast, simple, and extremely popular tacos."
+        },
+        {
+          name: "Keen’s Steakhouse",
+          cuisine: "Steakhouse",
+          price: "$$$",
+          description: "A historic steakhouse with a classic New York atmosphere."
+        },
+        {
+          name: "Urban Hawker",
+          cuisine: "Asian Food Hall",
+          price: "$$",
+          description: "A food hall with lots of different options in one place."
+        }
+      ],
+
+      "Hell’s Kitchen": [
+        {
+          name: "Pure Thai Cookhouse",
+          cuisine: "Thai",
+          price: "$$",
+          description: "Small Thai restaurant known for noodles and bold flavors."
+        },
+        {
+          name: "Empanada Mama",
+          cuisine: "Latin",
+          price: "$",
+          description: "A casual place with tons of empanada options."
+        },
+        {
+          name: "Don Antonio",
+          cuisine: "Pizza",
+          price: "$$",
+          description: "Popular pizza spot near the theater district."
+        }
+      ],
+
+      "Chelsea": [
+        {
+          name: "Los Tacos No. 1",
+          cuisine: "Mexican",
+          price: "$",
+          description: "A great stop inside Chelsea Market for tacos."
+        },
+        {
+          name: "Cookshop",
+          cuisine: "American",
+          price: "$$",
+          description: "Modern American food with a clean, bright vibe."
+        },
+        {
+          name: "Chelsea Market",
+          cuisine: "Food Hall",
+          price: "$$",
+          description: "Not one restaurant, but a great place to try a bunch of food."
+        }
+      ],
+
+      "West Village": [
+        {
+          name: "Don Angie",
+          cuisine: "Italian",
+          price: "$$$",
+          description: "A famous Italian restaurant with creative pasta dishes."
+        },
+        {
+          name: "Joe’s Pizza",
+          cuisine: "Pizza",
+          price: "$",
+          description: "Classic New York slice spot."
+        },
+        {
+          name: "Buvette",
+          cuisine: "French",
+          price: "$$",
+          description: "Small, cozy, and stylish brunch/dinner spot."
+        }
+      ],
+
+      "SoHo": [
+        {
+          name: "Balthazar",
+          cuisine: "French",
+          price: "$$$",
+          description: "A famous brasserie with a very NYC atmosphere."
+        },
+        {
+          name: "Rubirosa",
+          cuisine: "Italian / Pizza",
+          price: "$$",
+          description: "Known for vodka pizza and pasta."
+        },
+        {
+          name: "Prince Street Pizza",
+          cuisine: "Pizza",
+          price: "$",
+          description: "Famous for square pepperoni slices."
+        }
+      ],
+
+      "Chinatown": [
+        {
+          name: "Nom Wah Tea Parlor",
+          cuisine: "Dim Sum",
+          price: "$$",
+          description: "Historic dim sum spot with dumplings, buns, and tea."
+        },
+        {
+          name: "Joe’s Shanghai",
+          cuisine: "Chinese",
+          price: "$$",
+          description: "Known for soup dumplings."
+        },
+        {
+          name: "Mei Lai Wah",
+          cuisine: "Bakery",
+          price: "$",
+          description: "Popular for pork buns and quick snacks."
+        }
+      ],
+
+      "Lower East Side": [
+        {
+          name: "Katz’s Delicatessen",
+          cuisine: "Deli",
+          price: "$$",
+          description: "A legendary NYC deli known for pastrami sandwiches."
+        },
+        {
+          name: "Russ & Daughters",
+          cuisine: "Bagels / Appetizing",
+          price: "$$",
+          description: "Classic smoked fish, bagels, and New York food history."
+        },
+        {
+          name: "Essex Market",
+          cuisine: "Food Hall",
+          price: "$$",
+          description: "A good place to try different foods in one stop."
+        }
+      ],
+
+      "Financial District": [
+        {
+          name: "Eataly Downtown",
+          cuisine: "Italian Market",
+          price: "$$",
+          description: "Italian food hall with pasta, pizza, desserts, and groceries."
+        },
+        {
+          name: "Crown Shy",
+          cuisine: "New American",
+          price: "$$$",
+          description: "A polished restaurant with creative dishes."
+        },
+        {
+          name: "Pisillo Italian Panini",
+          cuisine: "Italian Sandwiches",
+          price: "$",
+          description: "Huge sandwiches that are great for lunch."
+        }
+      ]
+    };
+
+    function showRestaurants(neighborhood) {
+      let info = document.getElementById("info");
+      let places = restaurantData[neighborhood];
+
+      let html = "<h2>" + neighborhood + "</h2>";
+
+      for (let i = 0; i < places.length; i++) {
+        html += `
+          <div class="restaurant">
+            <h3>${i + 1}. ${places[i].name}</h3>
+            <span class="tag">${places[i].cuisine}</span>
+            <span class="tag">${places[i].price}</span>
+            <p>${places[i].description}</p>
+          </div>
+        `;
+      }
+
+      html += `<button onclick="randomPick('${neighborhood}')">Pick for me</button>`;
+
+      info.innerHTML = html;
+    }
+
+    function randomPick(neighborhood) {
+      let places = restaurantData[neighborhood];
+      let randomNumber = Math.floor(Math.random() * places.length);
+      let choice = places[randomNumber];
+
+      alert("You should try: " + choice.name);
+    }
+  </script>
+
+</body>
+</html>

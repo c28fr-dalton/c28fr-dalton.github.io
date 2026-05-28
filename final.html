@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CLUTCH</title>
+
+  <style>
+
+body{
+  margin:0;
+  background:#0f0f0f;
+  font-family:Arial;
+  color:white;
+  text-align:center;
+}
+
+    h1{
+      margin-top:20px;
+      font-size:60px;
+      letter-spacing:5px;
+    }
+
+    #timer{
+      font-size:40px;
+      margin-top:-20px;
+    }
+
+    #court{
+      width:1000px;
+      height:500px;
+      background:linear-gradient(#1e7a35,#145927);
+      margin:auto;
+      margin-top:20px;
+      position:relative;
+      border-radius:20px;
+      overflow:hidden;
+      border:5px solid white;
+    }
+
+    #goal{
+      width:200px;
+      height:120px;
+      border:8px solid white;
+      border-bottom:none;
+      position:absolute;
+      top:40px;
+      left:400px;
+    }
+
+    #player{
+      width:70px;
+      height:70px;
+      background:dodgerblue;
+      border-radius:50%;
+      position:absolute;
+      bottom:40px;
+      left:460px;
+    }
+
+    #ball{
+      width:25px;
+      height:25px;
+      background:white;
+      border-radius:50%;
+      position:absolute;
+      bottom:65px;
+      left:482px;
+      transition:all .6s;
+    }
+
+    #meter{
+      width:500px;
+      height:35px;
+      background:red;
+      margin:auto;
+      margin-top:25px;
+      position:relative;
+      border-radius:20px;
+      overflow:hidden;
+    }
+
+    #yellow{
+      width:220px;
+      height:100%;
+      background:gold;
+      position:absolute;
+      left:140px;
+    }
+
+    #green{
+      width:70px;
+      height:100%;
+      background:limegreen;
+      position:absolute;
+      left:215px;
+    }
+
+    #pointer{
+      width:10px;
+      height:100%;
+      background:white;
+      position:absolute;
+      left:0px;
+    }
+
+    button{
+      margin-top:25px;
+      padding:15px 40px;
+      border:none;
+      border-radius:15px;
+      font-size:25px;
+      cursor:pointer;
+      background:white;
+      font-weight:bold;
+    }
+
+    #message{
+      margin-top:20px;
+      font-size:35px;
+      height:50px;
+    }
+
+    #score{
+      font-size:30px;
+      margin-top:10px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h1>CLUTCH</h1>
+
+  <div id="timer">10</div>
+
+  <div id="court">
+
+    <div id="goal"></div>
+
+    <div id="player"></div>
+
+    <div id="ball"></div>
+
+  </div>
+
+  <div id="meter">
+
+    <div id="yellow"></div>
+
+    <div id="green"></div>
+
+    <div id="pointer"></div>
+
+  </div>
+
+  <button onclick="shoot()">SHOOT</button>
+
+  <div id="message"></div>
+
+  <div id="score">Score: 0</div>
+
+  <script>
+
+    let pointer = document.getElementById("pointer")
+    let ball = document.getElementById("ball")
+    let message = document.getElementById("message")
+    let scoreText = document.getElementById("score")
+    let timerText = document.getElementById("timer")
+
+    let x = 0
+    let speed = 6
+    let direction = 1
+
+    let score = 0
+    let time = 10
+
+    let canShoot = true
+
+    function movePointer(){
+
+      x += speed * direction
+
+      if(x >= 490 || x <= 0){
+        direction *= -1
+      }
+
+      pointer.style.left = x + "px"
+
+      requestAnimationFrame(movePointer)
+
+    }
+
+    movePointer()
+
+    function shoot(){
+
+      if(!canShoot){
+        return
+      }
+
+      canShoot = false
+
+      if(x >= 215 && x <= 285){
+
+        message.innerHTML = "CLUTCH SHOT!"
+        score += 3
+
+        ball.style.left = "487px"
+        ball.style.bottom = "390px"
+
+      }
+
+      else if(x >= 140 && x <= 360){
+
+        message.innerHTML = "GOOD SHOT"
+        score += 1
+
+        ball.style.left = "420px"
+        ball.style.bottom = "320px"
+
+      }
+
+      else{
+
+        message.innerHTML = "MISS"
+
+        ball.style.left = "250px"
+        ball.style.bottom = "250px"
+
+      }
+
+      scoreText.innerHTML = "Score: " + score
+
+      setTimeout(resetBall,700)
+
+    }
+
+    function resetBall(){
+
+      ball.style.left = "482px"
+      ball.style.bottom = "65px"
+
+      canShoot = true
+
+    }
+
+    function countdown(){
+
+      time--
+
+      timerText.innerHTML = time
+
+      if(time <= 0){
+
+        clearInterval(gameTimer)
+
+        message.innerHTML = "GAME OVER"
+
+        canShoot = false
+
+      }
+
+    }
+
+    let gameTimer = setInterval(countdown,1000)
+
+  </script>
+
+</body>
+</html>
